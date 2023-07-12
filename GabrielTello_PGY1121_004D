@@ -1,0 +1,274 @@
+import numpy as np
+a=0
+suma=0
+
+total_platinum=0
+total_gold=0
+total_silver=0
+e_ocupadas =[]
+rut_asistentes= []
+t_entradas = []
+entradas = (["Fila 1 ↓"], [1 ,2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10],
+            ["Fila 2 ↓"], [11,12,13,14,15,16,17,18,19,20],
+            ["Fila 3 ↓"], [21,22,23,24,25,26,27,28,29,30],
+            ["Fila 4 ↓"], [31,32,33,34,35,36,37,38,39,40],
+            ["Fila 5 ↓"], [41,42,43,44,45,46,47,48,49,50],
+            ["Fila 6 ↓"], [51,52,53,54,55,56,57,58,59,60],
+            ["Fila 7 ↓"], [61,62,63,64,65,66,67,68,69,70],
+            ["Fila 8 ↓"], [71,72,73,74,75,76,77,78,79,80],
+            ["Fila 9 ↓"], [81,82,83,84,85,86,87,88,89,90],
+            ["Fila 10↓"],[91,92,93,94,95,96,97,98,99,100])
+
+
+
+def disponibilidad ():
+  dispo=len(entradas)
+  print("")
+  print(" _________________________")
+  print("|                         |")
+  print("|        ESCENARIO        |")
+  print("|_________________________|")
+  print("")
+  for i in range(dispo):
+    print(entradas[i])
+
+def rut_cliente ():
+  print("")
+  print("» El formato de rut debe ser sin puntos, guión ni digito verificador «")
+  run=int(input(f"\nIngrese el RUN del cliente {i} : "))
+  rut_asistentes.append(run)
+def ingreso_clientes():
+  p=0
+  u=0
+  rut_asistentes.sort()
+  run_r=len(rut_asistentes)
+  print("Los ruts ingresados en el sistema son : ")
+  for k in range(run_r):
+    print(f"Cliente RUT → ",rut_asistentes[k])
+while a ==0:
+  print ("1. Comprar entradas")
+  print ("2. Mostrar ubicaciones disponibles")
+  print ("3. Ver listado de asistentes")
+  print ("4. Mostrar ganancias totales")
+  print ("5. Salir del sistema")
+  try:
+    op=int(input("Seleccione una opción:\n"))
+    if op >0 and op <6:
+      if op == 1:
+        a=1
+        c_entradas = int (input("Cuantas entradas va a comprar?:\n"))
+        if c_entradas >0 and c_entradas <4:
+          for i in range(1,c_entradas+1,1):
+
+
+            print("")
+            print("    LISTADO DE PRECIOS")
+            print("")
+            print("1) Platinum → $120.000. (Asientos del 1 al 20).")
+            print("2) Gold → $80.000. (Asientos del 21 al 50).")
+            print("3) Silver → $50.000. (Asientos del 51 al 100).")
+            print("")
+            t_entrada=int(input(f"\nIngrese el tipo de entrada del cliente {i} (1-3): "))
+            if t_entrada == 1 :
+              print(f"\n Usted ha seleccionado 1 entrada Platinum ")
+              t_entradas.append(120000)
+              total_platinum+=1
+              print("")
+              print("La operación se ha realizado correctamente")
+            elif t_entrada == 2 :
+              print(f"\n Usted ha seleccionado 1 entrada Gold ")
+              t_entradas.append(80000)
+              total_gold+=1
+              print("")
+              print("La operación se ha realizado correctamente")
+            else:
+              print(f"\n Usted ha seleccionado 1 entrada Silver ")
+              t_entradas.append(50000)
+              total_silver+=1
+              print("")
+              print("La operación se ha realizado correctamente")
+            print("")
+            dispo=len(entradas)
+            print("")
+            print("       _________________________")
+            print("      |                         |")
+            print("      |        ESCENARIO        |")
+            print("      |_________________________|")
+            print("")
+            for i in range(dispo):
+              print(entradas[i])
+            print("")
+            if t_entrada==1:
+              print("\n■ Entradas VIP abarcan asientos desde el 1 al 20 ■")
+              print("■ Filas 1 y 2 ■\n")
+            elif t_entrada==2:
+              print("\n■ Entradas NORMALES abarcan asientos desde el 21 al 30 ■")
+              print("■ Fila 3 ■\n")
+            elif t_entrada==3:
+              print("\n■ Entradas ECONÓMICAS abarcan asientos desde el 31 al 50 ■")
+              print("■ Filas 4 y 5 ■\n")
+            fila=int(input(f"\nIngrese la fila del asiento que desea comprar el cliente {i} : "))     #FILA
+            if t_entrada == 1 and fila == 1:
+              y=1
+              while y==1:
+                borrar=int(input("Ingrese el asiento que desea ocupar de la primera fila: "))  #ASIENTO 6
+                if borrar in e_ocupadas:
+                  print("\n ¡ No disponible !")
+                else:
+                  y=0
+                  entradas[1].remove(borrar)
+                  entradas[1].insert(borrar-1,"x")
+                  e_ocupadas.append(borrar)
+
+            elif t_entrada == 1 and fila == 2:
+              z=1
+              while z==1:
+                borrar=int(input("Ingrese el asiento que desea ocupar de la segunda fila: "))
+                if borrar in e_ocupadas:
+                  print("\n ¡ No disponible !")
+                else:
+                  z=0
+                  entradas[3].remove(borrar)
+                  entradas[3].insert(borrar-11,'X')
+                  entradas.append(borrar)
+
+            elif t_entrada == 2 and fila == 3:
+              h=1
+              while h==1:
+                borrar=int(input("Ingrese el asiento que desea ocupar de la tercera fila: "))
+                if borrar in e_ocupadas:
+                    print("\n ¡ No disponible !")
+                else:
+                  h=0
+                  entradas[5].remove(borrar)
+                  entradas[5].insert(borrar-21,'X')
+                  e_ocupadas.append(borrar)
+
+            elif t_entrada == 3 and fila == 4:
+              k=1
+              while k=1:
+                borrar=int(input("Ingrese el asiento que desea ocupar de la cuarta fila: "))
+                if borrar in e_ocupadas:
+                  print("\n ¡ No disponible !")
+                else:
+                  k=0
+                  entradas[7].remove(borrar)
+                  entradas[7].insert(borrar-31,'X')
+                  e_ocupadas.append(borrar)
+
+            elif t_entrada == 3 and fila == 5:
+              j=1
+              while j==1:
+                borrar=int(input("Ingrese el asiento que desea ocupar de la quinta fila: "))
+                if borrar in e_ocupadas:
+                  print("\n ¡ No disponible !")
+                else:
+                  j=0
+                  entradas[9].remove(borrar)
+                  entradas[9].insert(borrar-41,'x')
+                  e_ocupadas.append(borrar)
+            elif t_entrada == 1 and fila == 2:
+                borrar=int(input("Ingrese el asiento que desea ocupar de la primera fila: "))
+                if borrar in e_ocupadas:
+                  print("\n ¡ No disponible !")
+                else:
+                  y=0
+                  entradas[1].remove(borrar)
+                  entradas[1].insert(borrar-1,"x")
+                  e_ocupadas.append(borrar)
+
+            elif t_entrada == 1 and fila == 7:
+              z=1
+              while z==1:
+                borrar=int(input("Ingrese el asiento que desea ocupar de la segunda fila: "))
+                if borrar in e_ocupadas:
+                  print("\n ¡ No disponible !")
+                else:
+                  z=0
+                  entradas[3].remove(borrar)
+                  entradas[3].insert(borrar-11,'X')
+                  entradas.append(borrar)
+
+            elif t_entrada == 2 and fila == 8:
+              h=1
+              while h==1:
+                borrar=int(input("Ingrese el asiento que desea ocupar de la tercera fila: "))
+                if borrar in e_ocupadas:
+                    print("\n ¡ No disponible !")
+                else:
+                  h=0
+                  entradas[5].remove(borrar)
+                  entradas[5].insert(borrar-21,'X')
+                  e_ocupadas.append(borrar)
+
+            elif t_entrada == 3 and fila == 9:
+              k=1
+              while k=1:
+                borrar=int(input("Ingrese el asiento que desea ocupar de la cuarta fila: "))
+                if borrar in e_ocupadas:
+                  print("\n ¡ No disponible !")
+                else:
+                  k=0
+                  entradas[7].remove(borrar)
+                  entradas[7].insert(borrar-31,'X')
+                  e_ocupadas.append(borrar)
+
+            elif t_entrada == 3 and fila == 10:
+              j=1
+              while j==1:
+                borrar=int(input("Ingrese el asiento que desea ocupar de la quinta fila: ")) #48
+                if borrar in e_ocupadas:
+                  print("\n ¡ No disponible !")
+                else:
+                  j=0
+                  entradas[9].remove(borrar)
+                  entradas[9].insert(borrar-41,'x')
+                  e_ocupadas.append(borrar)
+            else:
+              print("\nFila incorrecta según el tipo de entrada deseada")
+
+
+          print("\nLa nueva disponibilidad es : ")
+          print("")
+          disponibilidad()
+
+          print("")
+          print(" ¡ LA OPERACIÓN SE HA REALIZADO DE MANERA EXITOSA !")
+          print(" → RECUERDE LLEGAR CON 1 HORA DE ANTICIPACIÓN PARA UNA ENTRADA ÓPTIMA ←")
+
+        else:
+          print("\nCantidad máxima de entradas permitidas por persona superada")
+          rut_asistentes.clear
+          ruts=[]
+          break
+      if op == 2 :
+        a=1
+        print("")
+        print(" →→ OPCIÓN 2 ←←")
+        print("")
+        print("")
+        print("Los asientos disponibles son : ")
+        print("")
+        disponibilidad()
+      if op == 3 :
+        a=1
+        print("")
+        print(" →→ OPCIÓN 3 ←←")
+        print("")
+        ingreso_clientes()
+      if op ==4:
+        a=1
+        print("")
+        print(" →→ OPCIÓN 4 ←←")
+        print("")
+        for valor in t_entradas:
+          suma+=valor
+        print(f"Las ganancias totales según entradas compradas por usuario son : ${suma}")
+        print(f"Se compraron {total_platinum} entrada(s) Platinum")
+        print(f"Se compraron {total_gold} entrada(s) Gold")
+        print(f"Se compraron {total_silver} entrada(s) Silver")
+      elif op ==5:
+        a=1
+      print ("Nos vemos en JAVA jaja saludos xd\n GABRIEL FRANCISCO TELLO FERNANDEZ\n12/07/2023")
+  except:
+    print ("NO ME DIGAS QUE INGRESASTE MAL UN NÚMERO EN EL EXAMEN FINAL\n¿Es real esto? u.u")
